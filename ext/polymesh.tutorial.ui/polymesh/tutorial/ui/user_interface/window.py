@@ -5,11 +5,13 @@ from pxr import Gf
 
 from omni.isaac.ui.ui_utils import *
 
+# Class used to generate the main GUI components. Extension ID is passed.
 class WindowExt(ui.Window):
     def __init__(self, title: str, ext_id: str, **kwargs) -> None:
         super().__init__(title=title, **kwargs)
         self._ext_id = ext_id
         
+        # Used to store and modify UI models.
         self.task_ui_elements = {}
 
         self.frame.set_build_fn(self._build_ui)
@@ -22,11 +24,12 @@ class WindowExt(ui.Window):
                     title = ""
                     doc_link = ""
 
-                    # [omni.isaac.ui].ui_utils.py
+                    # Builds the Extension header. [omni.isaac.ui]
                     build_header(self._ext_id, __file__, title, doc_link)
 
                     self._info_panel()
 
+    # Individual Panel to display the group related information. For the example we are simply holding the button here.
     def _info_panel(self):
         frame = ui.CollapsableFrame(
             title="Group Panel",
@@ -41,11 +44,11 @@ class WindowExt(ui.Window):
         with frame:
             with ui.VStack(style=get_style(), spacing=5, height=0):
 
-                # [omni.isaac.ui].ui_utils.py
-                self.task_ui_elements["Create Cube Btn"] = btn_builder(
+                # Create a button with a trigger function [omni.isaac.ui].ui_utils.py
+                self.task_ui_elements["Prim Path"] = btn_builder(
                     label="", 
                     type="button", 
-                    text="Create Cube", 
+                    text="button", 
                     tooltip="", 
                     on_clicked_fn=self._create_cube_btn
                 )
